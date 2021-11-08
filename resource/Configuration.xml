@@ -24,6 +24,7 @@
 	
    <mappers>
       <mapper resource = "mapper/Subject.xml"/>
+
    </mappers>
    
 </configuration>
