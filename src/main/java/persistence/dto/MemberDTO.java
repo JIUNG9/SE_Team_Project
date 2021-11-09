@@ -2,13 +2,17 @@ package main.java.persistence.dto;
 
 
 
-public abstract class MemberDTO{
+public  class MemberDTO{
 
 	String Name;
 	String Position;
 	String PhoneNumber;
 	String MemberID;
 	
+	
+	public MemberDTO() {
+		
+	}
 	
 	public String getMemberID() {
 		return MemberID;
