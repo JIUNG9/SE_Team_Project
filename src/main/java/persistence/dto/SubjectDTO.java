@@ -14,6 +14,14 @@ public class SubjectDTO {
 	}
 
 
+	public SubjectDTO(int subject_id, String subject_Name, int subject_Grade) {
+		super();
+		Subject_id = subject_id;
+		Subject_Name = subject_Name;
+		Subject_Grade = subject_Grade;
+	}
+
+
 	public int getSubject_id() {
 		return Subject_id;
 	}

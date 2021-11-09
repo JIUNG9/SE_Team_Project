@@ -15,18 +15,26 @@ import main.mapper.EstablishedMapper;
 public class Established_SubjectDAO{
 
 	//Singleton pattern
-	    private static SqlSessionFactory sqlSessionFactory;
-	     public Established_SubjectDAO() {
-	          if(sqlSessionFactory == null){ 
-            InputStream inputStream; 
-            try{ 
-                inputStream = Resources.getResourceAsStream("resource.Configuration.xml"); 
-                sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream); 
-            }catch (IOException e){ 
-                 e.printStackTrace(); 
-      	  } 
+		private static Established_SubjectDAO instance;
+		 InputStream inputStream;
+		   SqlSessionFactory sqlSessionFactory;
+		   //how singleton works?
+	     private Established_SubjectDAO() {   
+	    	 String resource = "resource.Configuration.xml";
+	         try {
+	             inputStream = Resources.getResourceAsStream(resource);
+	             sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+	         } catch (IOException e) {
+	             e.printStackTrace();
+	         }
         } 
-	     
+	     public static Established_SubjectDAO  getEstablished_SubjectService()
+	     {
+	    	   if (instance == null) {
+	               instance = new Established_SubjectDAO();
+	           }
+	           return instance;
+	    	 
 	     }
 	
 	     public int Insert(Established_SubjectDTO dto) {
@@ -45,22 +53,37 @@ public class Established_SubjectDAO{
 	     }
 	     
 	     
-	     public int Update(Established_SubjectDTO dto) {
+	     public int UpdateMaxNumber(Established_SubjectDTO dto,int id,int max) {
 	    	 SqlSession session = sqlSessionFactory.openSession();
 	    	 EstablishedMapper mapper = session.getMapper(EstablishedMapper.class);      
 
-	    	 dto=mapper.selectbyId(2);
-	    	 
+	    	 dto=mapper.selectbyId(id);
+	    	 dto.setMaximum_Student(max);
 	    	 //change the data using setter
 	    	 
-	    	int res= mapper.updateData(dto);
+	    	int res= mapper.updateMaxNumber(dto);
+	    	 session.commit();
+	    	 session.close();
+	    	 return res;
+	     }
+	     
+	     public int UpdatePlace(Established_SubjectDTO dto,int id,String place) {
+	    	 SqlSession session = sqlSessionFactory.openSession();
+	    	 EstablishedMapper mapper = session.getMapper(EstablishedMapper.class);      
+
+	    	 dto=mapper.selectbyId(id);
+	    	 dto.setClassroom(place);
+	    	 //change the data using setter
+	    	 
+	    	int res= mapper.updatePlace(dto);
 	    	 session.commit();
 	    	 session.close();
 	    	 return res;
 	     }
 	     
 	     
-	     public List<Established_SubjectDTO >selectDataAll(){
+	     
+	     public List<Established_SubjectDTO >selectData(){
 	    	 
 	    	  SqlSession session = sqlSessionFactory.openSession();
 	    	 EstablishedMapper mapper = session.getMapper(EstablishedMapper.class);      
@@ -70,26 +93,6 @@ public class Established_SubjectDAO{
 	    	 
 	     }
 	     
-	         public List<Established_SubjectDTO >selectBygrade(){
-	    	 
-	    	  SqlSession session = sqlSessionFactory.openSession();
-	    	 EstablishedMapper mapper = session.getMapper(EstablishedMapper.class);      
-	    	 List<Established_SubjectDTO> list =null;
-	    	 list =mapper.selectDataAll();
-	    	 return list;
-	    	 
-	     }
-	         
-	            public List<Established_SubjectDTO >selectByprof(){
-	    	 
-	    	  SqlSession session = sqlSessionFactory.openSession();
-	    	 EstablishedMapper mapper = session.getMapper(EstablishedMapper.class);      
-	    	 List<Established_SubjectDTO> list =null;
-	    	 list =mapper.selectDataAll();
-	    	 return list;
-	    	 
-	     }
-	    	 
 
 	
 }

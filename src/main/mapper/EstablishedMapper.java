@@ -39,8 +39,12 @@ public interface EstablishedMapper {
 
 	@Update("update membertab set name=#{name}, pass=#{pass} where id=#{id}")
 
-	public int updateData(Established_SubjectDTO dto);
+	public int updateMaxNumber(Established_SubjectDTO dto);
 	
+	@Update("update membertab set name=#{name}, pass=#{pass} where id=#{id}")
 	
+	public int updatePlace(Established_SubjectDTO dto);
+
+
 
 }

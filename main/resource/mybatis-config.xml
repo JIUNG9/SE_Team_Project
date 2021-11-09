@@ -14,16 +14,16 @@
 			
          <dataSource type = "POOLED">
             <property name = "driver" value = "com.mysql.jdbc.Driver"/>
-            <property name = "url" value = "jdbc:mysql://localhost:3306/details"/>
+            <property name = "url" value = "jdbc:mysql://localhost:3306/mydb"/>
             <property name = "username" value = "root"/>
-            <property name = "password" value = "1234"/>
+            <property name = "password" value = "k1651227"/>
          </dataSource>   
          
       </environment>
    </environments>
 	
    <mappers>
-      <mapper resource = "mapper/Subject.xml"/>
+      <mapper resource = "mapper/SubjectMapper.xml"/>
 
    </mappers>
    

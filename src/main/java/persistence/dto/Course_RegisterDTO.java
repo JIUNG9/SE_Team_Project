@@ -1,13 +1,12 @@
 package main.java.persistence.dto;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Course_RegisterDTO {
 
 	int Reg_number;
-	String Reg_subId;
 	String SubjectName;
-	int Reg_Stdid;
+	String Reg_Stdid;
 	String Reg_StdName;
 	Date Reg_Date;
 	Boolean SignClass_Able;
@@ -17,6 +16,17 @@ public class Course_RegisterDTO {
 	 
  }
 
+public Course_RegisterDTO(int reg_number, String subjectName,String reg_Stdid ,String reg_StdName,
+		Date reg_Date, Boolean signClass_Able) {
+	super();
+	Reg_number = reg_number;
+	SubjectName = subjectName;
+	Reg_StdName = reg_StdName;
+	Reg_Date = reg_Date;
+	Reg_Stdid=reg_Stdid;
+	SignClass_Able = signClass_Able;
+}
+
 public int getReg_number() {
 	return Reg_number;
 }
@@ -25,12 +35,14 @@ public void setReg_number(int reg_number) {
 	Reg_number = reg_number;
 }
 
-public String getReg_subId() {
-	return Reg_subId;
+
+
+public String getReg_Stdid() {
+	return Reg_Stdid;
 }
 
-public void setReg_subId(String reg_subId) {
-	Reg_subId = reg_subId;
+public void setReg_Stdid(String reg_Stdid) {
+	Reg_Stdid = reg_Stdid;
 }
 
 public String getSubjectName() {
@@ -41,13 +53,7 @@ public void setSubjectName(String subjectName) {
 	SubjectName = subjectName;
 }
 
-public int getReg_Stdid() {
-	return Reg_Stdid;
-}
 
-public void setReg_Stdid(int reg_Stdid) {
-	Reg_Stdid = reg_Stdid;
-}
 
 public String getReg_StdName() {
 	return Reg_StdName;
@@ -71,6 +77,12 @@ public Boolean getSignClass_Able() {
 
 public void setSignClass_Able(Boolean signClass_Able) {
 	SignClass_Able = signClass_Able;
+}
+
+@Override
+public String toString() {
+	return " Reg_number=" + Reg_number + ", SubjectName=" + SubjectName + ", Reg_Stdid=" + Reg_Stdid
+			+ ", Reg_StdName=" + Reg_StdName + ", Reg_Date=" + Reg_Date + ", SignClass_Able=" + SignClass_Able ;
 }
 
  

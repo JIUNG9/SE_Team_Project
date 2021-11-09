@@ -1,2 +1,10 @@
 eclipse.preferences.version=1
+encoding//src/main/java/controller/Contoller.java=UTF-8
+encoding//src/main/java/persistence/dao/Course_RegisterDAO.java=UTF-8
+encoding//src/main/java/persistence/dao/Established_SubjectDAO.java=UTF-8
 encoding//src/main/java/persistence/dao/MemberDAO.java=UTF-8
+encoding//src/main/java/persistence/dao/SubjectDAO.java=UTF-8
+encoding//src/main/java/service/Course_RegisterService.java=UTF-8
+encoding//src/main/java/service/Established_SubjectService.java=UTF-8
+encoding//src/main/java/service/MemberService.java=UTF-8
+encoding//src/main/java/service/SubjectService.java=UTF-8

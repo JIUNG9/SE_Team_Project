@@ -1,7 +1,6 @@
 package main.java.persistence.dto;
 
 
-
 public  class MemberDTO{
 
 	String Name;
@@ -14,6 +13,16 @@ public  class MemberDTO{
 		
 	}
 	
+	
+	public MemberDTO(String memberID, String name, String position, String phoneNumber) {
+		super();
+		Name = name;
+		Position = position;
+		PhoneNumber = phoneNumber;
+		MemberID = memberID;
+	}
+
+
 	public String getMemberID() {
 		return MemberID;
 	}
@@ -39,37 +48,13 @@ public  class MemberDTO{
 	public void setPhoneNumber(String phoneNumber) {
 		PhoneNumber = phoneNumber;
 	}
-	
-	
-}
 
 
-class Student extends MemberDTO {
-	
-	public Student() {
-		
-	}
-	// do not have to another constructor have another field for update
-	// because just use the where in query and could be update easily
-	
-	
-}
-
-class Professor extends MemberDTO{
-	
-	public Professor() {
-		
-	}
-	
-	
-	
-}
-
-
-class Admin extends MemberDTO{
-	
-	public Admin() {
-		
+	@Override
+	public String toString() {
+		return " Name=" + Name + ", Position=" + Position + ", PhoneNumber=" + PhoneNumber + ", MemberID="
+				+ MemberID;
 	}
 	
 }
+
