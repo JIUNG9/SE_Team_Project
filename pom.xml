@@ -19,6 +19,8 @@
   </dependencies>
   <build>
   
+		<defaultGoal>install</defaultGoal>
+
     <sourceDirectory>src</sourceDirectory>
     <plugins>
       <plugin>

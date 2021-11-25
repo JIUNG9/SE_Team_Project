@@ -20,9 +20,9 @@ public class Established_SubjectDAO{
 		   SqlSessionFactory sqlSessionFactory;
 		   //how singleton works?
 	     private Established_SubjectDAO() {   
-	    	 String resource = "resource.Configuration.xml";
+	    	
 	         try {
-	             inputStream = Resources.getResourceAsStream(resource);
+	             inputStream = Resources.getResourceAsStream("mybatis-config.xml");
 	             sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 	         } catch (IOException e) {
 	             e.printStackTrace();

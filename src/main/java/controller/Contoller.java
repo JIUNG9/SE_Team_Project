@@ -1,9 +1,10 @@
 package main.java.controller;
+import java.sql.Date;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.sql.Date;
-
 import java.util.List;
 
 import main.java.persistence.dto.Course_RegisterDTO;
@@ -39,7 +40,7 @@ public class Contoller {
 	MemberDTO M1 = new MemberDTO("S1","구지웅","Student","1111");
 	MemberDTO M2 =new MemberDTO("P1","김성렬","Professor","2222");
 	List<Boolean> list = new ArrayList<Boolean>();
-	/*
+	
 	boolean insert1=MemberService.getMemberService().Insert(M1);
 	list.add(insert1);
 	boolean insert2=MemberService.getMemberService().Insert(M2);
@@ -54,7 +55,6 @@ public class Contoller {
 			System.out.println(b);
 		}
 	}
-*/
 	
 	MemberService.getMemberService().ReadStudent();
 	MemberService.getMemberService().ReadProfessor();
@@ -67,8 +67,8 @@ public class Contoller {
 	      java.sql.Date date=new java.sql.Date(millis);  
 		Course_RegisterDTO C1 =new Course_RegisterDTO(1,"융합프로젝트","20191318","이우찬",date,false);
 		List<Boolean> list = new ArrayList<Boolean>();
-		//boolean insert1=Course_RegisterService.getMemberService().Insert(C1);
-		//list.add(insert1);
+		boolean insert1=Course_RegisterService.getMemberService().Insert(C1);
+		list.add(insert1);
 		Course_RegisterService.getMemberService().Read();
 	//Course_RegisterService.getMemberService().delete(1);
 
@@ -76,11 +76,12 @@ public class Contoller {
 	}
 
 	public void testEstablished() throws ParseException {
-	
-	
 		
-		//Date d1=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse("2011-01-01 00:00:00");
-		//Date d2 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse("2011-01-01 00:00:00");
+		 String str="2015-03-31";  
+		 Date d1=Date.valueOf(str);//converting string into sql date  
+		 String str2="2015-03-31";  
+		 Date d2=Date.valueOf(str2);//converting string into sql date 
+
 		
 
 		Established_SubjectDTO dto =new Established_SubjectDTO(1,"융합프로젝트","김성렬",2,"디지털관301호",3,"2일",d1,d2);
@@ -115,11 +116,12 @@ public class Contoller {
 	}
 	
 	
-	public static void main(String[] args) {
+	
+	public static void main(String[] args) throws ParseException {
 		
 		Contoller C =new Contoller();
 		//C.testMember();
-		C.testSubject();
 		//C.testCourse_Register();
+		C.testEstablished();
 	}
 }

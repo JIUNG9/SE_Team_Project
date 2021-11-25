@@ -53,7 +53,7 @@ public  class SubjectDAO implements Subject {
 			
 			  
 		      SqlSession session = SubjectDAO.sqlSessionFactory.openSession();
-		      res= session.insert("mapper.SubjectMapper.insert",subject);
+		      res= session.insert("com.mapper.SubjectMapper.insert",subject);
 		      session.commit();
 		      session.close();
 
@@ -64,7 +64,7 @@ public  class SubjectDAO implements Subject {
 	public int Update(SubjectDTO subject) {
 		int res;
         SqlSession session = sqlSessionFactory.openSession(); 
-        res = session.update("mapper.SubjectMapper.update",subject);
+        res = session.update("com.mapper.SubjectMapper.update",subject);
         return res;
 
 	}
@@ -73,7 +73,7 @@ public  class SubjectDAO implements Subject {
 	public List<SubjectDTO> ReadAll() {
 		SqlSession session = sqlSessionFactory.openSession();
 
-			List<SubjectDTO> subject = session.selectList("mapper.SubjectMapper.getAll");
+			List<SubjectDTO> subject = session.selectList("com.mapper.SubjectMapper.getAll");
 			session.close();
 			return subject;
 		
