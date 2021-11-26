@@ -1,5 +1,6 @@
 package main.java.persistence.dto;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class Established_SubjectDTO {
@@ -11,8 +12,8 @@ public class Established_SubjectDTO {
 	String Classroom;
 	int Maximum_Student;
 	String Day_Of_Week;
-	Date StartTime;
-	Date EndTime;
+	Timestamp StartTime;
+	Timestamp EndTime;
 	
 	
 	public Established_SubjectDTO() {
@@ -21,7 +22,7 @@ public class Established_SubjectDTO {
 
 
 	public Established_SubjectDTO(int est_Subject, String est_Subject_Name, String professsor_Name, int std_grade,
-			String classroom, int maximum_Student, String day_Of_Week, Date startTime, Date endTime) {
+			String classroom, int maximum_Student, String day_Of_Week, Timestamp startTime, Timestamp endTime) {
 		super();
 		Est_Subject = est_Subject;
 		Est_Subject_Name = est_Subject_Name;
@@ -108,22 +109,22 @@ public class Established_SubjectDTO {
 	}
 
 
-	public Date getStartTime() {
+	public Timestamp getStartTime() {
 		return StartTime;
 	}
 
 
-	public void setStartTime(Date startTime) {
+	public void setStartTime(Timestamp startTime) {
 		StartTime = startTime;
 	}
 
 
-	public Date getEndTime() {
+	public Timestamp getEndTime() {
 		return EndTime;
 	}
 
 
-	public void setEndTime(Date endTime) {
+	public void setEndTime(Timestamp endTime) {
 		EndTime = endTime;
 	}
 	

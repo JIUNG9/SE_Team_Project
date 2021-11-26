@@ -25,7 +25,7 @@ public static Established_SubjectService getEstablished_SubjectService(){ {
 }
 	public boolean insert(Established_SubjectDTO dto) {
 		
-	int res= Established_SubjectDAO.getEstablished_SubjectService().Insert(dto);
+	int res= Established_SubjectDAO.getEstablished_SubjectDAO().Insert(dto);
 		
 		
 		if(res>0) return true;
@@ -33,26 +33,29 @@ public static Established_SubjectService getEstablished_SubjectService(){ {
 	}
 
 
-public boolean UpdateMaxNumber(Established_SubjectDTO dto,int id,int max) {
+public boolean Update(Established_SubjectDTO dto,String subName) {
 	
-	int res=Established_SubjectDAO.getEstablished_SubjectService().UpdateMaxNumber(dto,id,max);
+	int res=Established_SubjectDAO.getEstablished_SubjectDAO().Update(dto,subName);
 		
 		
 		if(res>0) return true;
 		return false;
 	}
-public boolean UpdatePlace(Established_SubjectDTO dto,int id,String place) {
+
+public boolean Delete(String subName) {
 	
-	int res=Established_SubjectDAO.getEstablished_SubjectService().UpdatePlace(dto,id,place);
+	int res=Established_SubjectDAO.getEstablished_SubjectDAO().Delete(subName);
 		
 		
 		if(res>0) return true;
 		return false;
 	}
+
+
 
 public void ReadDataAll(){
 	List<Established_SubjectDTO> list=new ArrayList<Established_SubjectDTO>();
-	list =Established_SubjectDAO.getEstablished_SubjectService().selectData();
+	list =Established_SubjectDAO.getEstablished_SubjectDAO().getAll();
 	
 	for(Established_SubjectDTO dto :list )
 	{
@@ -60,42 +63,6 @@ public void ReadDataAll(){
 	}
 	
 }
-
-public void ReadProfessor(String name){
-	List<Established_SubjectDTO> list=new ArrayList<Established_SubjectDTO>();
-	list =Established_SubjectDAO.getEstablished_SubjectService().selectData();
-	
-	for(Established_SubjectDTO dto :list )
-	{	if(dto.getProfesssor_Name().equals(name))
-		System.out.println(dto.toString());
-	}
-	
-}
-
-public void ReadStudent(int grade){
-	List<Established_SubjectDTO> list=new ArrayList<Established_SubjectDTO>();
-	list =Established_SubjectDAO.getEstablished_SubjectService().selectData();
-	
-	for(Established_SubjectDTO dto :list )
-	{	if(dto.getStd_grade()==grade)
-		System.out.println(dto.toString());
-	}
-	
-}
-
-public void ReadStWithProf(String name, int grade){
-	List<Established_SubjectDTO> list=new ArrayList<Established_SubjectDTO>();
-	list =Established_SubjectDAO.getEstablished_SubjectService().selectData();
-	
-	for(Established_SubjectDTO dto :list )
-	{	if(dto.getStd_grade()==grade && dto.getProfesssor_Name().equals(name))
-		System.out.println(dto.toString());
-	}
-	
-}
-
-
-
 
 
 

@@ -6,7 +6,6 @@ import java.util.List;
 import main.java.persistence.dao.SubjectDAO;
 import main.java.persistence.dto.SubjectDTO;
 
-//CRU
 public class SubjectService {
 
 	private static SubjectService instance;
@@ -15,9 +14,9 @@ public class SubjectService {
 		
 	}
 	
-public static SubjectService getSubjectService(){ {
+public static SubjectService getSubjectService(){ 
 		
-		if(instance ==null)
+		if(instance ==null) {
 			instance =new SubjectService();
 		
 	}
@@ -33,10 +32,9 @@ public boolean insert(SubjectDTO dto) {
 	return false;
 }
 
-public boolean Update(SubjectDTO dto,String Subname) {
+public boolean Update(SubjectDTO dto,String subName) {
 	
-	dto.setSubject_Name(Subname);
-	int res=SubjectDAO.getSubjectDAO().Update(dto);
+	int res=SubjectDAO.getSubjectDAO().Update(dto,subName);
 		
 		if(res>0) return true;
 		return false;
@@ -54,16 +52,14 @@ public void ReadDataAll(){
 	
 }
 
-public void ReadByGrade(int grade){
-	List<SubjectDTO> list=new ArrayList<SubjectDTO>();
-	list =SubjectDAO.getSubjectDAO().ReadAll();
-
+public boolean Delete(String subName) {
 	
-	for(SubjectDTO dto :list )
-	{
-		if(dto.getSubject_Grade()==grade) {
-		System.out.println(dto.toString());
-	}
-	}
+	
+	int res= SubjectDAO.getSubjectDAO().Delete(subName);
+	if(res>0) return true;
+	return false;
+
+
 }
+
 }

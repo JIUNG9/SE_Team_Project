@@ -84,7 +84,7 @@ public class Contoller {
 
 		
 
-		Established_SubjectDTO dto =new Established_SubjectDTO(1,"융합프로젝트","김성렬",2,"디지털관301호",3,"2일",d1,d2);
+		//Established_SubjectDTO dto =new Established_SubjectDTO(1,"융합프로젝트","김성렬",2,"디지털관301호",3,"2일",d1,d2);
 		Established_SubjectService.getEstablished_SubjectService().insert(dto);
 		
 		Established_SubjectService.getEstablished_SubjectService().UpdateMaxNumber(dto,1,4);
@@ -110,7 +110,7 @@ public class Contoller {
 		SubjectService.getSubjectService().insert(dto2);
 		SubjectService.getSubjectService().Update(dto2,"디자인패턴");
 		SubjectService.getSubjectService().ReadDataAll();
-		SubjectService.getSubjectService().ReadByGrade(2);
+		//SubjectService.getSubjectService().ReadByGrade(2);
 	
 		
 	}
