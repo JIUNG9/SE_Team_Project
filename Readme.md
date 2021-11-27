@@ -1,13 +1,13 @@
 
 
-#### This is a Enrolment classes project in University, Use the JDBC for connection MYSQL and Socket Progrramming with Java.
+## This is a Enrolment classes project in University, Use the JDBC for connection MYSQL and Socket Progrramming with Java.
 * Login 
 * MVC pattern
 * Socket Programming(JAVA)
 
 
 
-Topic1 : Database Connection Singleton pattern vs Connection pool
+## Topic1 : Database Connection Singleton pattern vs Connection pool
 
 Solution: Database should be thread-safe. but using Singleton pattern does not apply the thread-safe. just only on static instance would be shared.
 so use the Connection Pool
