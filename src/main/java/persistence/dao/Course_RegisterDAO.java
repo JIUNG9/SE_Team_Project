@@ -1,15 +1,13 @@
 package main.java.persistence.dao;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import main.java.ConnecctionPool.PooledDataSource;
+import main.java.persistence.dto.Course_RegisterDTO;
+
+import javax.sql.DataSource;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.java.persistence.dto.Course_RegisterDTO;
 
 interface ICourseRegisterDAO{
 	public int Insert(Course_RegisterDTO Course);
@@ -29,22 +27,22 @@ private static Course_RegisterDAO instance;
 			instance =new Course_RegisterDAO();
 		}
 		return instance;
-		
+
 	}
-	//private constructor 
 	private Course_RegisterDAO() {
 	}
-	
-	
+
+	//private constructor
+
 	
 	@Override
 	public int Insert(Course_RegisterDTO Course) {
 		Connection conn=null;
+
 		PreparedStatement pstmt =null;
-	try {	
-		conn = DriverManager
-	            .getConnection("jdbc:mysql://localhost/mydb?serverTimezone=UTC&"
-	           + "user=root&password=k1651227");
+	try {
+		DataSource ds = PooledDataSource.getDataSource();
+		conn = ds.getConnection();
 		  
 		String sql ="INSERT INTO Course_Register VALUES(?, ?, ?, ?, ?,?);";
 
@@ -92,10 +90,9 @@ private static Course_RegisterDAO instance;
 	public int delete(int courseId) {
 		Connection conn=null;
 		PreparedStatement pstmt =null;
-	try {	
-		conn = DriverManager
-	            .getConnection("jdbc:mysql://localhost/mydb?serverTimezone=UTC&"
-	           + "user=root&password=k1651227");
+	try {
+		DataSource ds = PooledDataSource.getDataSource();
+		conn = ds.getConnection();
 		  
 		String sql =" DELETE  FROM Course_Register WHERE Reg_number=?"; // input the sql here
 		pstmt =conn.prepareStatement(sql);
@@ -136,10 +133,9 @@ return 0;
 		PreparedStatement pstmt =null;
 		List<Course_RegisterDTO> list =new ArrayList<Course_RegisterDTO>();
 		ResultSet rs =null;
-	try {	
-		conn = DriverManager
-	            .getConnection("jdbc:mysql://localhost/mydb?serverTimezone=UTC&"
-	           + "user=root&password=k1651227");
+	try {
+		DataSource ds = PooledDataSource.getDataSource();
+		conn = ds.getConnection();
 		 
 		String sql ="Select * From Course_Register;"; 
 		pstmt =conn.prepareStatement(sql);
@@ -148,9 +144,9 @@ return 0;
 		while(rs.next())
 		{
 			Course_RegisterDTO dto=new Course_RegisterDTO();
-			
-			
-			dto.setReg_Date(rs.getDate("Reg_Date"));
+
+
+//			dto.setReg_Date(rs.getDate("Reg_Date"));
 			dto.setReg_number(rs.getInt("Reg_number"));
 			dto.setReg_StdName(rs.getString("Reg_StdName"));
 			dto.setSignClass_Able(rs.getBoolean("SignClass_Able"));

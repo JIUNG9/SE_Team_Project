@@ -1,20 +1,12 @@
 package main.java.persistence.dao;
 
-import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import main.java.ConnecctionPool.PooledDataSource;
+import main.java.persistence.dto.SubjectDTO;
+
+import javax.sql.DataSource;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-
-import main.java.persistence.dto.MemberDTO;
-import main.java.persistence.dto.SubjectDTO;
 
 interface Subject{
 	
@@ -45,9 +37,9 @@ private static SubjectDAO instance;
 		
 		Connection conn=null;
 		PreparedStatement pstmt =null;
-	try {	
-		conn = DriverManager
-	            .getConnection("jdbc:mysql://localhost:3306/mydb", "root", "k1651227");
+	try {
+		DataSource ds = PooledDataSource.getDataSource();
+		conn = ds.getConnection();
 		String sql =" INSERT INTO Member VALUES(?, ?);";
 			
 		pstmt =conn.prepareStatement(sql);
@@ -93,9 +85,9 @@ private static SubjectDAO instance;
 	public int Update(SubjectDTO dto ,String subName) {
 		Connection conn=null;
 		PreparedStatement pstmt =null;
-	try {	
-		conn = DriverManager
-	            .getConnection("jdbc:mysql://localhost:3306/mydb", "root", "k1651227");
+	try {
+		DataSource ds = PooledDataSource.getDataSource();
+		conn = ds.getConnection();;
 		String sql ="UPDATE SET Subject_Name =? Subject_grade = ? Where Subject_Name=?";
 			 
 		pstmt =conn.prepareStatement(sql);
@@ -140,9 +132,9 @@ private static SubjectDAO instance;
 		PreparedStatement pstmt =null;
 		List<SubjectDTO> list =new ArrayList<SubjectDTO>();
 		ResultSet rs =null;
-	try {	
-		conn = DriverManager
-	            .getConnection("jdbc:mysql://localhost:3306/mydb", "root", "k1651227");
+	try {
+		DataSource ds = PooledDataSource.getDataSource();
+		conn = ds.getConnection();;
 		 
 		String sql ="SELECT * FROM Subject;"; 
 		pstmt =conn.prepareStatement(sql);
@@ -187,9 +179,9 @@ return list;
 	public int Delete(String subName) {
 		Connection conn=null;
 		PreparedStatement pstmt =null;
-	try {	
-		conn = DriverManager
-	            .getConnection("jdbc:mysql://localhost:3306/mydb", "root", "k1651227");
+	try {
+		DataSource ds = PooledDataSource.getDataSource();
+		conn = ds.getConnection();;
 		String sql ="DELETE FROM Subject Where Subject_Name =?";
 			 
 		pstmt =conn.prepareStatement(sql);

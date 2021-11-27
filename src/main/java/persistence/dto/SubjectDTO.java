@@ -1,12 +1,15 @@
 package main.java.persistence.dto;
 
+import java.sql.Date;
+
 public class SubjectDTO {
 
 
 	int Subject_id;
 	String  Subject_Name;
 	int Subject_Grade;
-	
+	String Syllabus;
+	Date SyllabusDate;
 	
 	public SubjectDTO() {
 		
@@ -50,9 +53,20 @@ public class SubjectDTO {
 	public void setSubject_Grade(int subject_Grade) {
 		Subject_Grade = subject_Grade;
 	}
-	
-	
-	
-	
-	
+
+	public String getSyllabus() {
+		return Syllabus;
+	}
+
+	public void setSyllabus(String syllabus) {
+		Syllabus = syllabus;
+	}
+
+	public Date getSyllabusDate() {
+		return SyllabusDate;
+	}
+
+	public void setSyllabusDate(Date syllabusDate) {
+		SyllabusDate = syllabusDate;
+	}
 }

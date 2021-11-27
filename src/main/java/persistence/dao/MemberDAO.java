@@ -1,20 +1,18 @@
 package main.java.persistence.dao;
 
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import main.java.ConnecctionPool.PooledDataSource;
+import main.java.persistence.dto.MemberDTO;
+
+import javax.sql.DataSource;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.java.persistence.dto.MemberDTO;
-
 interface IMemberDAO{
 	public int Insert(MemberDTO member);
-	int UpdatePhonNum(String UserId, MemberDTO member,String PhoneNum);
-	int UpdateStudentName(String UserId, MemberDTO member,String Name);
+	int Delete(String Name,String Position);
+	int Update(MemberDTO member, String name, String position);
 	public  List<MemberDTO> GetAllMember();
 	
 
@@ -28,7 +26,7 @@ public class MemberDAO implements IMemberDAO {
 	private static MemberDAO instance;
 	
 	//this method make can get resource or make the resoure and return it
-	public static MemberDAO GetMemberDAO() {
+		public static MemberDAO GetMemberDAO() {
 		if(instance ==null) {
 			instance =new MemberDAO();
 		}
@@ -43,17 +41,16 @@ public class MemberDAO implements IMemberDAO {
 		
 		Connection conn=null;
 		PreparedStatement pstmt =null;
-	try {	
-		conn = DriverManager
-	            .getConnection("jdbc:mysql://localhost:3306/mydb", "root", "k1651227");
-		String sql =" INSERT INTO Member VALUES(?, ?, ?, ?);";
-			
+	try {
+		DataSource ds = PooledDataSource.getDataSource();
+
+		conn = ds.getConnection();
+		String sql =" INSERT MEMBER VALUE (?,?,?) ";
 		pstmt =conn.prepareStatement(sql);
 		//need to add setString the number of "?"
-		pstmt.setString(1, member.getMemberID());
-		pstmt.setString(2, member.getName());
-		pstmt.setString(3, member.getPosition());
-		pstmt.setString(4, member.getPhoneNumber());
+		pstmt.setString(1, member.getName());
+		pstmt.setString(2, member.getPosition());
+		pstmt.setString(3, member.getPhoneNumber());
 
 		
 
@@ -85,29 +82,33 @@ public class MemberDAO implements IMemberDAO {
 
 	
 	}
-	
-	
-	
+
 	@Override
-	public int UpdatePhonNum(String UserId, MemberDTO member,String PhonNumber) {
+	public int Delete(String Name, String Position) {
 		Connection conn=null;
 		PreparedStatement pstmt =null;
-	try {	
-		conn = DriverManager
-	            .getConnection("jdbc:mysql://localhost:3306/mydb", "root", "k1651227");
-		String sql ="UPDATE Member SET PhoneNumber =? Where MemberID=?";
-			 
-		pstmt =conn.prepareStatement(sql);
-		pstmt.setString(1,PhonNumber);
-		pstmt.setString(2, UserId);
-		int res =pstmt.executeUpdate();
-		return res;
-	}	
-	catch(SQLException ex) {
-		ex.printStackTrace();
-	}
-	finally {
-	
+		try {
+			DataSource ds = PooledDataSource.getDataSource();
+			conn = ds.getConnection();
+
+			String sql =" DELETE Member Where MemberName = ? AND Position = ? ;";
+
+			pstmt =conn.prepareStatement(sql);
+			//need to add setString the number of "?"
+			pstmt.setString(1, Name);
+			pstmt.setString(2, Position);
+
+
+
+
+			int res =pstmt.executeUpdate();
+			return res;
+		}
+		catch(SQLException ex) {
+			ex.printStackTrace();
+		}
+		finally {
+
 			if(pstmt!=null)
 				try {
 					pstmt.close();
@@ -121,40 +122,41 @@ public class MemberDAO implements IMemberDAO {
 					e.printStackTrace();
 				}
 			}
-			
-	
-	}
-	return 0;
 
-	
-		
+
+		}
+		return 0;
+
+
 	}
+
 	@Override
-	public int UpdateStudentName(String UserId, MemberDTO member,String name) {
+	public int Update(MemberDTO member, String name, String position) {
 		Connection conn=null;
 		PreparedStatement pstmt =null;
-	try {	
-		conn = DriverManager
-	            .getConnection("jdbc:mysql://localhost:3306/mydb", "root", "k1651227");
-		  
-		String sql ="UPDATE Member SET MemberName=? WHERE MemberID=?;";
-				
-				
-		pstmt =conn.prepareStatement(sql);
-		//need to add setString the number of "?"
-		pstmt.setString(1, name);
-		pstmt.setString(2, UserId);
+		try {
+			DataSource ds = PooledDataSource.getDataSource();
 
-		
+			conn = ds.getConnection();
 
-		int res =pstmt.executeUpdate();
-		return res;
-	}	
-	catch(SQLException ex) {
-		ex.printStackTrace();
-	}
-	finally {
-	
+			String sql =" Update Member SET MemberName =? Position =? PhoneNumber =?  VALUES(?, ?, ?, ?);";
+
+			pstmt =conn.prepareStatement(sql);
+			//need to add setString the number of "?"
+			pstmt.setString(2, member.getName());
+			pstmt.setString(3, member.getPosition());
+			pstmt.setString(4, member.getPhoneNumber());
+
+
+
+			int res =pstmt.executeUpdate();
+			return res;
+		}
+		catch(SQLException ex) {
+			ex.printStackTrace();
+		}
+		finally {
+
 			if(pstmt!=null)
 				try {
 					pstmt.close();
@@ -168,14 +170,18 @@ public class MemberDAO implements IMemberDAO {
 					e.printStackTrace();
 				}
 			}
+
+
+		}
+		return 0;
+
+	}
+
+
+
 			
 	
-	}
-	return 0;
 
-	
-		
-	}
 
 	
 // How SelectPosition work?
@@ -188,11 +194,11 @@ public class MemberDAO implements IMemberDAO {
 		PreparedStatement pstmt =null;
 		List<MemberDTO> list =new ArrayList<MemberDTO>();
 		ResultSet rs =null;
-	try {	
-		conn = DriverManager
-	            .getConnection("jdbc:mysql://localhost:3306/mydb", "root", "k1651227");
-		 
-		String sql ="SELECT * FROM Member;"; 
+	try {
+		DataSource ds = PooledDataSource.getDataSource();
+		conn = ds.getConnection();
+
+		String sql ="SELECT * FROM Member;";
 		pstmt =conn.prepareStatement(sql);
 		pstmt.executeQuery();
 		rs=pstmt.executeQuery();

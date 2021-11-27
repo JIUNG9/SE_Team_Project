@@ -7,7 +7,7 @@ public class Established_SubjectDTO {
 
 	int Est_Subject;
 	String Est_Subject_Name;
-	String Professsor_Name;
+	String Professor_Name;
 	int Std_grade;
 	String Classroom;
 	int Maximum_Student;
@@ -26,13 +26,14 @@ public class Established_SubjectDTO {
 		super();
 		Est_Subject = est_Subject;
 		Est_Subject_Name = est_Subject_Name;
-		Professsor_Name = professsor_Name;
+		Professor_Name = professsor_Name;
 		Std_grade = std_grade;
 		Classroom = classroom;
 		Maximum_Student = maximum_Student;
 		Day_Of_Week = day_Of_Week;
 		StartTime = startTime;
 		EndTime = endTime;
+
 	}
 
 
@@ -58,13 +59,13 @@ public class Established_SubjectDTO {
 	}
 
 
-	public String getProfesssor_Name() {
-		return Professsor_Name;
+	public String getProfessor_Name() {
+		return Professor_Name;
 	}
 
 
-	public void setProfesssor_Name(String professsor_Name) {
-		Professsor_Name = professsor_Name;
+	public void setProfessor_Name(String professor_Name) {
+		Professor_Name = professor_Name;
 	}
 
 
