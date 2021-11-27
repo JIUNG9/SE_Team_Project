@@ -1,4 +1,4 @@
-Topic1 : Database Connection Singleton pattern vs Connection pool
+## Topic1 : Database Connection Singleton pattern vs Connection pool
 
 Solution: Database should be thread-safe. but using Singleton pattern does not apply the thread-safe. just only on static instance would be shared.
 so use the Connection Pool
