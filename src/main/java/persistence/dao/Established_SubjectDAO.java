@@ -4,7 +4,10 @@ import main.java.ConnecctionPool.PooledDataSource;
 import main.java.persistence.dto.Established_SubjectDTO;
 
 import javax.sql.DataSource;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +20,8 @@ interface IEstablished {
     public int Delete(String subName);
 
     public List<Established_SubjectDTO> getAll();
+
+    public Established_SubjectDTO getOne(String subName);
 
 
 }
@@ -100,7 +105,7 @@ public class Established_SubjectDAO implements IEstablished {
         try {
             DataSource ds = PooledDataSource.getDataSource();
             conn = ds.getConnection();;
-            String sql = "UPDATE Established_Subject SET Est_Subject_Name =? Professor_Name = ? Std_grade =? Classroom = ? Maximum_Student = ?  Day_Of_Week = ? StartTime = ? EndTime = ?  Where Est_Subject_Name=?";
+            String sql = "UPDATE  Established_Subject SET  Est_Subject_Name =? Professor_Name = ? Std_grade =? Classroom = ? Maximum_Student = ?  Day_Of_Week = ? StartTime = ? EndTime = ?  Where Est_Subject_Name=?";
 
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, dto.getEst_Subject_Name());
@@ -167,11 +172,10 @@ public class Established_SubjectDAO implements IEstablished {
                 dto.setProfessor_Name(rs.getString("Professor_Name"));
                 dto.setStd_grade(rs.getInt("Std_grade"));
                 dto.setClassroom(rs.getString("Classroom"));
-                dto.setClassroom(rs.getString("Classroom"));
                 dto.setMaximum_Student(rs.getInt("Maximum_Student"));
                 dto.setDay_Of_Week(rs.getString("Day_Of_Week"));
                 dto.setStartTime(rs.getTimestamp("StartTime"));
-                dto.setStartTime(rs.getTimestamp("EndTime"));
+                dto.setEndTime(rs.getTimestamp("EndTime"));
 
                 list.add(dto);
             }
@@ -201,6 +205,63 @@ public class Established_SubjectDAO implements IEstablished {
         return list;
 
     }
+
+    @Override
+    public Established_SubjectDTO getOne(String subName) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        Established_SubjectDTO dto = new Established_SubjectDTO();
+        ResultSet rs = null;
+        try {
+            DataSource ds = PooledDataSource.getDataSource();
+            conn = ds.getConnection();
+
+
+            String sql = "SELECT * FROM Subject WHERE Est_Subject_Name=?;";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, subName);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+
+
+                dto.setEst_Subject_Name(rs.getString("Est_Subject_Name"));
+                dto.setProfessor_Name(rs.getString("Professor_Name"));
+                dto.setStd_grade(rs.getInt("Std_grade"));
+                dto.setClassroom(rs.getString("Classroom"));
+                dto.setMaximum_Student(rs.getInt("Maximum_Student"));
+                dto.setDay_Of_Week(rs.getString("Day_Of_Week"));
+                dto.setStartTime(rs.getTimestamp("StartTime"));
+                dto.setEndTime(rs.getTimestamp("EndTime"));
+
+
+
+
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+
+            if (pstmt != null)
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+        }
+        return dto;
+    }
+
+
     public int Delete(String subName) {
         Connection conn = null;
 
@@ -237,10 +298,6 @@ public class Established_SubjectDAO implements IEstablished {
 
         }
         return 0;
-
-
     }
-
-
 }
 

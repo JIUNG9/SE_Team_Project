@@ -5,68 +5,99 @@ import java.sql.Date;
 public class SubjectDTO {
 
 
-	int Subject_id;
-	String  Subject_Name;
-	int Subject_Grade;
-	String Syllabus;
-	Date SyllabusDate;
-	
+	int SubjectId;
+	String subjectName;
+	int subjectGrade;
+	String professor;
+	Date startTime;
+	Date endTime;
+	String syllabus;
+	Date syllabusDate;
+	String dayOfWeek;
 	public SubjectDTO() {
-		
-		
 	}
 
-
-	public SubjectDTO(int subject_id, String subject_Name, int subject_Grade) {
-		super();
-		Subject_id = subject_id;
-		Subject_Name = subject_Name;
-		Subject_Grade = subject_Grade;
+	public SubjectDTO(int subjectId, String subjectName, int subjectGrade, String professor, Date startTime, Date endTime, String syllabus, Date syllabusDate, String dayOfWeek) {
+		SubjectId = subjectId;
+		this.subjectName = subjectName;
+		this.subjectGrade = subjectGrade;
+		this.professor = professor;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.syllabus = syllabus;
+		this.syllabusDate = syllabusDate;
+		this.dayOfWeek = dayOfWeek;
 	}
 
-
-	public int getSubject_id() {
-		return Subject_id;
+	public String getDayOfWeek() {
+		return dayOfWeek;
 	}
 
-
-	public void setSubject_id(int subject_id) {
-		Subject_id = subject_id;
+	public void setDayOfWeek(String dayOfWeek) {
+		this.dayOfWeek = dayOfWeek;
 	}
 
-
-	public String getSubject_Name() {
-		return Subject_Name;
+	public int getSubjectId() {
+		return SubjectId;
 	}
 
-
-	public void setSubject_Name(String subject_Name) {
-		Subject_Name = subject_Name;
+	public void setSubjectId(int subjectId) {
+		SubjectId = subjectId;
 	}
 
-
-	public int getSubject_Grade() {
-		return Subject_Grade;
+	public String getSubjectName() {
+		return subjectName;
 	}
 
+	public void setSubjectName(String subjectName) {
+		this.subjectName = subjectName;
+	}
 
-	public void setSubject_Grade(int subject_Grade) {
-		Subject_Grade = subject_Grade;
+	public int getSubjectGrade() {
+		return subjectGrade;
+	}
+
+	public void setSubjectGrade(int subjectGrade) {
+		this.subjectGrade = subjectGrade;
+	}
+
+	public String getProfessor() {
+		return professor;
+	}
+
+	public void setProfessor(String professor) {
+		this.professor = professor;
+	}
+
+	public Date getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
+	}
+
+	public Date getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
 	}
 
 	public String getSyllabus() {
-		return Syllabus;
+		return syllabus;
 	}
 
 	public void setSyllabus(String syllabus) {
-		Syllabus = syllabus;
+		this.syllabus = syllabus;
 	}
 
 	public Date getSyllabusDate() {
-		return SyllabusDate;
+		return syllabusDate;
 	}
 
 	public void setSyllabusDate(Date syllabusDate) {
-		SyllabusDate = syllabusDate;
+		this.syllabusDate = syllabusDate;
 	}
 }

@@ -4,89 +4,93 @@ import java.sql.Date;
 
 public class Course_RegisterDTO {
 
-	int Reg_number;
-	String SubjectName;
-	String Reg_Stdid;
-	String Reg_StdName;
-	Date Reg_Date;
-	Boolean SignClass_Able;
-	
+	int regNumber;
+	String regSubjectName;
+	String regStdid;
+	String regStdName;
+	Date regDate;
+	Boolean signClassAble;
+	int regGrade;
+	String MemberID;
+	int Subject_Id;
+
+
  public Course_RegisterDTO() {
 	 
 	 
  }
 
-public Course_RegisterDTO(int reg_number, String subjectName,String reg_Stdid ,String reg_StdName,
-		Date reg_Date, Boolean signClass_Able) {
-	super();
-	Reg_number = reg_number;
-	SubjectName = subjectName;
-	Reg_StdName = reg_StdName;
-	Reg_Date = reg_Date;
-	Reg_Stdid=reg_Stdid;
-	SignClass_Able = signClass_Able;
-}
+	public String getMemberID() {
+		return MemberID;
+	}
 
-public int getReg_number() {
-	return Reg_number;
-}
+	public void setMemberID(String memberID) {
+		MemberID = memberID;
+	}
 
-public void setReg_number(int reg_number) {
-	Reg_number = reg_number;
-}
+	public int getSubject_Id() {
+		return Subject_Id;
+	}
+
+	public String getRegSubjectName() {
+		return regSubjectName;
+	}
+
+	public void setRegSubjectName(String regSubjectName) {
+		this.regSubjectName = regSubjectName;
+	}
+
+	public void setSubject_Id(int subject_Id) {
+		Subject_Id = subject_Id;
+	}
+
+	public int getRegNumber() {
+		return regNumber;
+	}
+
+	public int getRegGrade() {
+		return regGrade;
+	}
+
+	public void setRegGrade(int regGrade) {
+		this.regGrade = regGrade;
+	}
+
+	public void setRegNumber(int regNumber) {
+		this.regNumber = regNumber;
+	}
 
 
 
-public String getReg_Stdid() {
-	return Reg_Stdid;
-}
+	public String getRegStdid() {
+		return regStdid;
+	}
 
-public void setReg_Stdid(String reg_Stdid) {
-	Reg_Stdid = reg_Stdid;
-}
+	public void setRegStdid(String regStdid) {
+		this.regStdid = regStdid;
+	}
 
-public String getSubjectName() {
-	return SubjectName;
-}
+	public String getRegStdName() {
+		return regStdName;
+	}
 
-public void setSubjectName(String subjectName) {
-	SubjectName = subjectName;
-}
+	public void setRegStdName(String regStdName) {
+		this.regStdName = regStdName;
+	}
 
+	public Date getRegDate() {
+		return regDate;
+	}
 
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
+	}
 
-public String getReg_StdName() {
-	return Reg_StdName;
-}
+	public Boolean getSignClassAble() {
+		return signClassAble;
+	}
 
-public void setReg_StdName(String reg_StdName) {
-	Reg_StdName = reg_StdName;
-}
-
-public Date getReg_Date() {
-	return Reg_Date;
-}
-
-public void setReg_Date(Date reg_Date) {
-	Reg_Date = reg_Date;
-}
-
-public Boolean getSignClass_Able() {
-	return SignClass_Able;
-}
-
-public void setSignClass_Able(Boolean signClass_Able) {
-	SignClass_Able = signClass_Able;
-}
-
-@Override
-public String toString() {
-	return " Reg_number=" + Reg_number + ", SubjectName=" + SubjectName + ", Reg_Stdid=" + Reg_Stdid
-			+ ", Reg_StdName=" + Reg_StdName + ", Reg_Date=" + Reg_Date + ", SignClass_Able=" + SignClass_Able ;
-}
-
- 
- 
-	
-	
+	public void setSignClassAble(Boolean signClassAble) {
+		this.signClassAble = signClassAble;
+	}
 }

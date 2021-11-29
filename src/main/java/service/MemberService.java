@@ -1,11 +1,9 @@
 package main.java.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import main.java.persistence.dao.MemberDAO;
-import main.java.persistence.dto.Course_RegisterDTO;
 import main.java.persistence.dto.MemberDTO;
+
+import java.util.List;
 public class MemberService {
 
 	private static MemberService instance;
@@ -23,57 +21,100 @@ public class MemberService {
 	}
 	return instance;
 }
-	
-	public boolean Insert(MemberDTO dto) {
-		
-		int res = MemberDAO.GetMemberDAO().Insert(dto); 
-		if(res>0) return true;
-		return false;
-		
-		
-	}
-	
-	public boolean UpdateProPhoneNum(String MemberId ,MemberDTO dto,String PhonNumb) {
-		int res = MemberDAO.GetMemberDAO().UpdatePhonNum(MemberId,dto,PhonNumb); 
-		if(res>0) return true;
-		return false;
-		
-	}
-	
-	public boolean UpdateStName(String MemberId ,MemberDTO dto,String Name) {
-		int res = MemberDAO.GetMemberDAO().UpdateStudentName(MemberId,dto,Name); 
-		if(res>0) return true;
-		return false;
-		
-	}
-	
-	public void ReadProfessor()
-	{
-		List<MemberDTO> list = new ArrayList<MemberDTO>();
 
-		list = MemberDAO.GetMemberDAO().GetAllMember();
+
+	public boolean login(String id, String password){
+		MemberDTO dto =null;
+		boolean flag =false;
+		dto = MemberDAO.GetMemberDAO().getOne(id,password);
+		if(dto!=null){
+			flag =true;
+		}
+		return flag;
+	}
+
+	
+	public boolean insert(MemberDTO dto) {
+		
+		int res = MemberDAO.GetMemberDAO().insert(dto);
+		if(res>0) return true;
+		return false;
+		
+		
+	}
+
+	public boolean updateInfo(MemberDTO newDto ,String currId, String currPassword)  {
+		 boolean flag= false;
+		MemberDTO dto =null;
+		dto = MemberDAO.GetMemberDAO().getLoginSession(currId,currPassword);
+		if(dto!=null){
+			MemberDAO.GetMemberDAO().update(newDto ,currId);
+			flag =true;
+		}
+return flag;
+	}
+
+
+
+
+	
+	public void readProfessor()
+	{
+		List<MemberDTO> list = null;
+
+		list = MemberDAO.GetMemberDAO().getAllMember();
 		String P ="Professor";
-		for(MemberDTO m:list) {
-			if(m.getPosition().equals(P) ) {
-				System.out.println(m.toString());
+		if(list!=null) {
+			for (MemberDTO m : list) {
+				if (m.getPosition().equals(P)) {
+					System.out.println(m.getName());
+					System.out.println(m.getPhoneNumber());
+
+				}
 			}
+		}
+		else{
+			System.out.println("there is no matched data");
 		}
 		
 	}
-	public void ReadStudent()
+	public void readStudent()
 	{
-		List<MemberDTO> list = new ArrayList<MemberDTO>();
+		List<MemberDTO> list =null;
 
-		list = MemberDAO.GetMemberDAO().GetAllMember();
+		list = MemberDAO.GetMemberDAO().getAllMember();
 		String S ="Student";
-
-		for(MemberDTO m:list) {
-			if(m.getPosition().equals(S)) {
-				System.out.println(m.toString());
-			}
+if(list!=null) {
+	for (MemberDTO m : list) {
+		if (m.getPosition().equals(S)) {
+			System.out.println(m.getName());
+			System.out.println(m.getPhoneNumber());
 		}
+	}
+}
+else{
+	System.out.println("there is no matched data");
+}
 		
 	}
+
+	public void readStudentFromCourseReg(String subId){
+		List<MemberDTO> list = null;
+		String S ="Student";
+		list = MemberDAO.GetMemberDAO().getStudentFromCourseReg(subId);
+		if(list!=null){
+			for (MemberDTO m : list) {
+				if (m.getPosition().equals(S)) {
+					System.out.println(m.getName());
+				}
+			}
+		}
+else{
+			System.out.println("there is no matched data");
+		}
+
+	}
+
 	
 	
 }

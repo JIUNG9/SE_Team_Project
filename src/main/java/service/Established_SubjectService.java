@@ -1,10 +1,9 @@
 package main.java.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import main.java.persistence.dao.Established_SubjectDAO;
 import main.java.persistence.dto.Established_SubjectDTO;
+
+import java.util.List;
 
 public class Established_SubjectService {
 
@@ -51,17 +50,23 @@ public boolean Delete(String subName) {
 		return false;
 	}
 
+public void readOne(String subName){
+	Established_SubjectDTO dto =Established_SubjectDAO.getEstablished_SubjectDAO().getOne(subName);
+	System.out.println(dto.toString());
+}
 
-
-public void ReadDataAll(){
-	List<Established_SubjectDTO> list=new ArrayList<Established_SubjectDTO>();
+public void readDataAll(){
+	List<Established_SubjectDTO> list=null;
 	list =Established_SubjectDAO.getEstablished_SubjectDAO().getAll();
-	
-	for(Established_SubjectDTO dto :list )
-	{
-		System.out.println(dto.toString());
+	if(list!=null) {
+		for (Established_SubjectDTO dto
+				: list) {
+			System.out.println(dto.toString());
+		}
 	}
-	
+	else{
+		System.out.println("There is no matched data");
+	}
 }
 
 

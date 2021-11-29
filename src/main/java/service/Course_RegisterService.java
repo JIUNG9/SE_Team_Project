@@ -1,12 +1,12 @@
 package main.java.service;
 
 
-
-import java.util.ArrayList;
-import java.util.List;
-
 import main.java.persistence.dao.Course_RegisterDAO;
 import main.java.persistence.dto.Course_RegisterDTO;
+
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Course_RegisterService {
 
@@ -17,9 +17,10 @@ private Course_RegisterService(){
       * the instantiation of this class directly*/
   }
 
-public static Course_RegisterService getMemberService(){ {
+public static Course_RegisterService getCourse_RegisterService(){ {
 	
 	if(instance ==null)
+
 		instance =new Course_RegisterService();
 	
 }
@@ -29,18 +30,38 @@ return instance;
 public boolean Insert(Course_RegisterDTO dto) {
 	
 	
-	int res = Course_RegisterDAO.GetCourse_RegisterDAO().Insert(dto); 
+	int res = Course_RegisterDAO.GetCourse_RegisterDAO().insert(dto);
 	if(res>0) return true;
 	return false;
 	
 	
 }
 
+public boolean update(Course_RegisterDTO dto, String subName){
+	int res = Course_RegisterDAO.GetCourse_RegisterDAO().update(dto,subName);
+	if(res>0) return true;
+	return false;
+
+}
+
+public boolean setRegDateByGrade(int grade, Date exp){
+	List<Course_RegisterDTO> list =new ArrayList<Course_RegisterDTO>();
+	list =Course_RegisterDAO.GetCourse_RegisterDAO().getAllSubject();
+	boolean flag =false;
+	for(Course_RegisterDTO c : list){
+		if(c.getRegGrade()==grade){
+			c.setRegDate(exp);
+			update(c,c.getRegSubjectName());
+			flag =true;
+		}
+	}
+	return flag;
+}
 
 
-public void Read() {
-	List<Course_RegisterDTO> list =new ArrayList<Course_RegisterDTO>(); 
-	list =Course_RegisterDAO.GetCourse_RegisterDAO().GetAllSubject(); 
+public void readAll() {
+	List<Course_RegisterDTO> list =new ArrayList<Course_RegisterDTO>();
+	list =Course_RegisterDAO.GetCourse_RegisterDAO().getAllSubject();
 	
 	for(Course_RegisterDTO dto : list) {
 		System.out.println(dto.toString());
@@ -48,11 +69,12 @@ public void Read() {
 	
 }
 
-public void delete(int CourseId)
+public boolean delete(String subName)
 {
-	int res = Course_RegisterDAO.GetCourse_RegisterDAO().delete(CourseId); 
-	if(res>0) System.out.println("delete is success");
-	System.out.println(" delete is fail");
+	int res = Course_RegisterDAO.GetCourse_RegisterDAO().delete(subName);
+	if(res>0) return true;
+	return false;
+
 
 }
 

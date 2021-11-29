@@ -2,59 +2,64 @@ package main.java.persistence.dto;
 
 
 public  class MemberDTO{
-
-	String Name;
-	String Position;
-	String PhoneNumber;
-	String MemberID;
-	
-	
-	public MemberDTO() {
-		
-	}
-	
-	
-	public MemberDTO(String memberID, String name, String position, String phoneNumber) {
-		super();
-		Name = name;
-		Position = position;
-		PhoneNumber = phoneNumber;
-		MemberID = memberID;
-	}
+	String password;
+	String name;
+	String position;
+	String phoneNumber;
+	String memberId;
 
 
-	public String getMemberID() {
-		return MemberID;
+	public MemberDTO(){
+
 	}
-	
-	public void setMemberID(String memberID) {
-		MemberID=memberID;
+	public MemberDTO(String name,String memberId, String password ,String position, String phoneNumber) {
+		this.password = password;
+		this.name = name;
+		this.position = position;
+		this.phoneNumber = phoneNumber;
+		this.memberId = memberId;
 	}
+
+	public String getPassword() {
+		return this.password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public String getName() {
-		return Name;
+		return name;
 	}
+
 	public void setName(String name) {
-		Name = name;
+		this.name = name;
 	}
+
 	public String getPosition() {
-		return Position;
+		return position;
 	}
+
 	public void setPosition(String position) {
-		Position = position;
+		this.position = position;
 	}
+
 	public String getPhoneNumber() {
-		return PhoneNumber;
+		return phoneNumber;
 	}
+
 	public void setPhoneNumber(String phoneNumber) {
-		PhoneNumber = phoneNumber;
+		this.phoneNumber = phoneNumber;
+	}
+
+	public String getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 
 
-	@Override
-	public String toString() {
-		return " Name=" + Name + ", Position=" + Position + ", PhoneNumber=" + PhoneNumber + ", MemberID="
-				+ MemberID;
-	}
-	
 }
 
